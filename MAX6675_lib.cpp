@@ -6,22 +6,22 @@
 
 MAX6675::MAX6675(int8_t CS ) {
     this->cs = CS;
-    pinMode(cs, OUTPUT);
-    digitalWrite(cs, HIGH);
+    pinMode(this->cs, OUTPUT);
+    digitalWrite(this->cs, HIGH);
 }
 
 double MAX6675::readCelsius(void) {
   uint16_t v;
   //SPI clock speed:4.3MHz, Data Shift:MSB First, Data Clock Idle: SPI_MODE0
   SPI.beginTransaction(SPISettings(4300000, MSBFIRST, SPI_MODE0));
-  digitalWrite(cs, LOW);
+  digitalWrite(this->cs, LOW);
   _delay_ms(1);
 
   v = SPI.transfer(0x00);
   v <<= 8;
   v |= SPI.transfer(0x00);
 
-  digitalWrite(cs, HIGH);
+  digitalWrite(this->cs, HIGH);
   SPI.endTransaction();
 
   if (v & 0x4) return NAN; // Thermocouple disconnected!
