@@ -1,6 +1,4 @@
-#include <avr/pgmspace.h>
-#include <util/delay.h>
-#include <stdlib.h>
+#include <Arduino.h>
 #include "MAX6675_lib.h"
 #include "SPI.h"
 
@@ -15,7 +13,6 @@ double MAX6675::readCelsius(void) {
   //SPI clock speed:4.3MHz, Data Shift:MSB First, Data Clock Idle: SPI_MODE0
   SPI.beginTransaction(SPISettings(4300000, MSBFIRST, SPI_MODE0));
   digitalWrite(this->cs, LOW);
-  _delay_ms(1);
 
   v = SPI.transfer(0x00);
   v <<= 8;
