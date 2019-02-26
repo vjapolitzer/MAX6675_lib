@@ -11,7 +11,8 @@
 #define MAX6675_LIB_H
 #include "Arduino.h"
 
-class MAX6675 {
+class MAX6675
+{
     public:
         /* Constructor
         * ...Parameters:
